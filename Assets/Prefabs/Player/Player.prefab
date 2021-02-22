@@ -99,3 +99,4 @@ MonoBehaviour:
   laserPrefab: {fileID: 6547085013126719535, guid: d0429e1ca9f16ab4e85132a6b7c47f85,
     type: 3}
   laserSpeed: 15
+  fireSpeed: 0.1
