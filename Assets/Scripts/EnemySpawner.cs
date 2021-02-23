@@ -15,9 +15,14 @@ public class EnemySpawner : MonoBehaviour
         if (waveConfigs == null || waveConfigs.Count == 0)
             return;
 
+        StartCoroutine(SpawnAllWaves());
+    }
+
+    private IEnumerator SpawnAllWaves()
+    {
         for (_waveIndex = 0; _waveIndex < waveConfigs.Count; _waveIndex++)
         {
-            StartCoroutine(SpawnAllEnemiesInWave(waveConfigs[_waveIndex]));
+            yield return StartCoroutine(SpawnAllEnemiesInWave(waveConfigs[_waveIndex]));
         }
     }
 
