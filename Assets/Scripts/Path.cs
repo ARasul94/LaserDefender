@@ -1,15 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Path : MonoBehaviour
 {
-    [SerializeField] private List<Transform> waypoints;
+    private List<Transform> _waypoints;
+    public List<Transform> Waypoints => _waypoints;
 
-    public List<Transform> Waypoints => waypoints;
+    private void Awake()
+    {
+        _waypoints = new List<Transform>();
+        foreach (Transform child in transform)
+        {
+            _waypoints.Add(child);
+        }
+    }
 
     public bool IsEmpty()
     {
-        return waypoints == null || waypoints.Count == 0;
+        return _waypoints == null || _waypoints.Count == 0;
     }
 }

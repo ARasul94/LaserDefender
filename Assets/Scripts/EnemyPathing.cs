@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyPathing : MonoBehaviour
 {
-    [SerializeField] private Path path;
-    [SerializeField] private float moveSpeed;
-
+    private float _moveSpeed;
+    private Path _path;
+    private bool _isLast;
     private int _waypointIndex = 0;
-
-    private void Start()
-    {
-        if (!path.IsEmpty())
-            transform.position = path.Waypoints[_waypointIndex].position;
-    }
 
     private void Update()
     {
@@ -23,10 +19,10 @@ public class EnemyPathing : MonoBehaviour
 
     private void Move()
     {
-        if (!path.IsEmpty() && path.Waypoints.Count > _waypointIndex)
+        if (!_path.IsEmpty() && _path.Waypoints.Count > _waypointIndex)
         {
-            var targetPosition = path.Waypoints[_waypointIndex].position;
-            var movementInThisFrame = moveSpeed * Time.deltaTime;
+            var targetPosition = _path.Waypoints[_waypointIndex].position;
+            var movementInThisFrame = _moveSpeed * Time.deltaTime;
             transform.position = Vector2.MoveTowards(
                 transform.position, 
                 targetPosition, 
@@ -39,7 +35,19 @@ public class EnemyPathing : MonoBehaviour
         }
         else
         {
+            if (_isLast)
+                Destroy(_path.gameObject);
             Destroy(gameObject);
         }
+    }
+
+    public void SetupEnemyParameters(Path path, float speed, bool isLast)
+    {
+        _path = path;
+        _moveSpeed = speed;
+        _isLast = isLast;
+        
+        if (!_path.IsEmpty())
+            transform.position = _path.Waypoints[_waypointIndex].position;
     }
 }
