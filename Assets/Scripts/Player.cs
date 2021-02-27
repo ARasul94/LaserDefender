@@ -97,6 +97,7 @@ public class Player : MonoBehaviour
             return;
         
         health -= damageDealer.GetDamage();
+        damageDealer.Hit();
         if (health <= 0)
             Die();
     }

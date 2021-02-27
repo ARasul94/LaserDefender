@@ -58,6 +58,7 @@ public class Enemy : MonoBehaviour
             return;
         
         health -= damageDealer.GetDamage();
+        damageDealer.Hit();
         if (health <= 0)
             Die();
     }
