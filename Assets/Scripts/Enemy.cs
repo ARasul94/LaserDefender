@@ -7,8 +7,9 @@ using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Enemy")]
+    [Header("Enemy stats")]
     [SerializeField] private float health;
+    [SerializeField] private int scoreForKill = 100;
     [Header("Fire")]
     [SerializeField] private float shootCounter;
     [SerializeField] private float minTimeBetweenShoots = 0.3f;
@@ -73,6 +74,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        FindObjectOfType<GameSession>().AddScore(scoreForKill);
         Destroy(gameObject);
         PlaySFX(deathSound, deathSoundVolume);
         PlayVFX();
