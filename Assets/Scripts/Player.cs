@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float laserSpeed;
     [SerializeField] private float fireSpeed;
     [Header("Player")] 
-    [SerializeField] private float health = 200;
+    [SerializeField] private int health = 200;
     [Header("Destroy")]
     [SerializeField] private GameObject destroyVFX;
     [SerializeField] private float destroyVFXDelay = 2f;
@@ -140,5 +140,10 @@ public class Player : MonoBehaviour
     {
         var destroyVfxObject = Instantiate(destroyVFX, transform.position, transform.rotation);
         Destroy(destroyVfxObject, destroyVFXDelay);
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 }
