@@ -102,6 +102,9 @@ MonoBehaviour:
   laserSpeed: 15
   fireSpeed: 0.1
   health: 200
+  destroyVFX: {fileID: 8662914714173475151, guid: c6cfa01d21606a044b7db6ab4ba247e4,
+    type: 3}
+  destroyVFXDelay: 2
 --- !u!60 &6354052553607202605
 PolygonCollider2D:
   m_ObjectHideFlags: 0

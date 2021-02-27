@@ -124,10 +124,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc138bd0be944a144b3bef24bab7b863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
+  health: 100
   shootCounter: 0
   minTimeBetweenShoots: 0.3
   maxTimeBetweenShoots: 3
   laserPrefab: {fileID: 1021039600539053866, guid: 7c4850a83122e6e42ae088dd642abd6e,
     type: 3}
-  laserSpeed: 15
+  laserSpeed: 10
+  destroyVFX: {fileID: 8662914714173475151, guid: c6cfa01d21606a044b7db6ab4ba247e4,
+    type: 3}
+  destroyVFXDelay: 2

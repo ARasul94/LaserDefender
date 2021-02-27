@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float maxTimeBetweenShoots = 3f;
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float laserSpeed = 15;
+    [SerializeField] private GameObject destroyVFX;
+    [SerializeField] private float destroyVFXDelay = 2f;
+    
+    
     
     
 
@@ -66,5 +70,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        var destroyVfxObject = Instantiate(destroyVFX, transform.position, transform.rotation);
+        Destroy(destroyVfxObject, destroyVFXDelay);
     }
 }
