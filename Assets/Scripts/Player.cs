@@ -15,8 +15,11 @@ public class Player : MonoBehaviour
     [Header("Destroy")]
     [SerializeField] private GameObject destroyVFX;
     [SerializeField] private float destroyVFXDelay = 2f;
-
-    
+    [Header("Sounds")] 
+    [SerializeField] private AudioClip deathSound;
+    [SerializeField][Range(0,1)] private float deathSoundVolume = 0.5f;
+    [SerializeField] private AudioClip shootSound;
+    [SerializeField][Range(0,1)] private float shootSoundVolume = 0.05f;
 
     private Vector2 _minBoundary;
     private Vector2 _maxBoundary;
@@ -72,6 +75,7 @@ public class Player : MonoBehaviour
         {
             var laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
+            PlaySFX(shootSound, shootSoundVolume);
 
             yield return new WaitForSeconds(fireSpeed);
         }
@@ -108,6 +112,17 @@ public class Player : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        PlaySFX(deathSound, deathSoundVolume);
+        PlayVFX();
+    }
+
+    private void PlaySFX(AudioClip soundToPlay, float volume)
+    {
+        AudioSource.PlayClipAtPoint(soundToPlay, Camera.main.transform.position, volume);
+    }
+
+    private void PlayVFX()
+    {
         var destroyVfxObject = Instantiate(destroyVFX, transform.position, transform.rotation);
         Destroy(destroyVfxObject, destroyVFXDelay);
     }

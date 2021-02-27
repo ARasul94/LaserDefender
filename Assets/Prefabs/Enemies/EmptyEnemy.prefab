@@ -134,3 +134,7 @@ MonoBehaviour:
   destroyVFX: {fileID: 8662914714173475151, guid: c6cfa01d21606a044b7db6ab4ba247e4,
     type: 3}
   destroyVFXDelay: 2
+  deathSound: {fileID: 8300000, guid: 057c0459b9202594f9fee29efc61f8f7, type: 3}
+  deathSoundVolume: 0.5
+  shootSound: {fileID: 8300000, guid: 38987bdbbaecbf143a989f2e9ffb35ec, type: 3}
+  shootSoundVolume: 0.1
