@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Moving")]
     [SerializeField] private float speed;
     [SerializeField] private float padding;
+    [Header("Fire")]
     [SerializeField] private GameObject laserPrefab;
     [SerializeField] private float laserSpeed;
     [SerializeField] private float fireSpeed;
+    [Header("Player")] 
+    [SerializeField] private float health = 200;
+
     
 
     private Vector2 _minBoundary;
@@ -78,5 +83,26 @@ public class Player : MonoBehaviour
 
         _minBoundary = new Vector2(leftBotCorner.x + padding, leftBotCorner.y + padding);
         _maxBoundary = new Vector2(rightTopCorner.x - padding, rightTopCorner.y - padding);
+    }
+    
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var damageDealer = other.gameObject.GetComponent<DamageDealer>();
+        ProcessHit(damageDealer);
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        if (damageDealer == null)
+            return;
+        
+        health -= damageDealer.GetDamage();
+        if (health <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
