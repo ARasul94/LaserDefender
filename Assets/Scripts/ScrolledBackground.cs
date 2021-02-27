@@ -20,7 +20,8 @@ public class ScrolledBackground : MonoBehaviour
     private void Update()
     {
         var xOffset = Input.GetAxis("Horizontal") * scrollXSpeed;
-        var yOffset = scrollYSpeed+ Input.GetAxis("Vertical") * scrollYSpeed;
+        var verticalInput = Input.GetAxis("Vertical");
+        var yOffset = scrollYSpeed + (verticalInput > 0 ? verticalInput : 0) * scrollYSpeed;
         var offset = new Vector2(xOffset, yOffset);
         _material.mainTextureOffset += offset * Time.deltaTime;
     }
