@@ -43,9 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88dd2831ad551c747ad60d34558a30e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startScene:
-    m_Handle: 0
-  gameScene:
-    m_Handle: 1
-  gameOverScene:
-    m_Handle: 2
+  loadDelay: 2

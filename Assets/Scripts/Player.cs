@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -24,7 +26,21 @@ public class Player : MonoBehaviour
     private Vector2 _minBoundary;
     private Vector2 _maxBoundary;
     private Coroutine _fireContinuously;
-    
+    private Level _level;
+    private Camera _camera;
+
+
+    private void Awake()
+    {
+        _level = FindObjectOfType<Level>();
+        if (_level == null)
+            throw new Exception($"No Level gameobject on scene {SceneManager.GetActiveScene().name}");
+        
+        _camera = Camera.main;
+        if (_camera == null)
+            throw new Exception($"No Camera gameobject on scene {SceneManager.GetActiveScene().name}");
+    }
+
     private void Start()
     {
         SetupBoundaries();
@@ -83,10 +99,8 @@ public class Player : MonoBehaviour
     
     private void SetupBoundaries()
     {
-        var camera = Camera.main;
-
-        var leftBotCorner = camera.ViewportToWorldPoint(new Vector2(0, 0));
-        var rightTopCorner = camera.ViewportToWorldPoint(new Vector2(1, 1));
+        var leftBotCorner = _camera.ViewportToWorldPoint(new Vector2(0, 0));
+        var rightTopCorner = _camera.ViewportToWorldPoint(new Vector2(1, 1));
 
         _minBoundary = new Vector2(leftBotCorner.x + padding, leftBotCorner.y + padding);
         _maxBoundary = new Vector2(rightTopCorner.x - padding, rightTopCorner.y - padding);
@@ -114,11 +128,12 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
         PlaySFX(deathSound, deathSoundVolume);
         PlayVFX();
+        _level.LoadGameOverScene();
     }
 
     private void PlaySFX(AudioClip soundToPlay, float volume)
     {
-        AudioSource.PlayClipAtPoint(soundToPlay, Camera.main.transform.position, volume);
+        AudioSource.PlayClipAtPoint(soundToPlay, _camera.transform.position, volume);
     }
 
     private void PlayVFX()

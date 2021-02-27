@@ -105,7 +105,7 @@ MonoBehaviour:
   destroyVFX: {fileID: 8662914714173475151, guid: c6cfa01d21606a044b7db6ab4ba247e4,
     type: 3}
   destroyVFXDelay: 2
-  deathSound: {fileID: 8300000, guid: 057c0459b9202594f9fee29efc61f8f7, type: 3}
+  deathSound: {fileID: 8300000, guid: 41cf53c78e9ed9c42b1596f39c80928f, type: 3}
   deathSoundVolume: 0.5
   shootSound: {fileID: 8300000, guid: 9582a1e70566eab4e8e22be7ced03489, type: 3}
   shootSoundVolume: 0.025
@@ -119,7 +119,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
